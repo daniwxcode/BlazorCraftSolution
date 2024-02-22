@@ -15,11 +15,15 @@ using System.Threading.Tasks;
 namespace Framework.Infra.Contexts;
 
 public abstract class AuditContext(DbContextOptions<AuditContext> options) :
-        IdentityDbContext<User,Role,string,IdentityUserClaim<string>,IdentityUserRole<string>,IdentityUserLogin<string>,RoleClaim,IdentityUserToken<string>>(options)
+        IdentityDbContext<User, Role, string, IdentityUserClaim<string>, IdentityUserRole<string>, IdentityUserLogin<string>, RoleClaim, IdentityUserToken<string>>(options)
 {
     public DbSet<Audit> AuditTrails { get; set; }
-    public virtual async Task<int> SaveChangesAsync(string userId = null, CancellationToken cancellationToken = new())
+    public virtual async Task<int> SaveChangesAsync(string? userId = null, CancellationToken cancellationToken = new())
     {
+        if (userId == null)
+        {
+            return await base.SaveChangesAsync(cancellationToken);
+        }
         var auditEntries = OnBeforeSaveChanges(userId);
         var result = await base.SaveChangesAsync(cancellationToken);
         await OnAfterSaveChanges(auditEntries, cancellationToken);
@@ -42,6 +46,8 @@ public abstract class AuditContext(DbContextOptions<AuditContext> options) :
             auditEntries.Add(auditEntry);
             foreach (var property in entry.Properties)
             {
+                if(property is null)
+                    continue;
                 if (property.IsTemporary)
                 {
                     auditEntry.TemporaryProperties.Add(property);

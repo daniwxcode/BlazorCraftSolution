@@ -12,7 +12,7 @@ public class Role :IdentityRole, IAuditable<string>
     }
     public required string Description { get; set; }       
     public DateTime CreatedOn { get; init; }
-    public string CreatedBy { get; set; }
+    public required string CreatedBy { get; set; }
     public DateTime? LastUpdatedOn { get; set; }
     public string? LastUpdatedBy { get; set; }
     public bool IsDeleted { get; set; }
