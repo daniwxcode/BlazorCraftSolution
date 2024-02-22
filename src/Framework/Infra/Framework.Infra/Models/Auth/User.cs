@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Framework.Infra.Models.Auth;
 
-public class User : IdentityUser<Guid>, IAuditable<Guid>
+public class User : IdentityUser<string>, IAuditable<string>
 {
     public required string FirstName { get; set; }
     public required string LastName { get; set; }

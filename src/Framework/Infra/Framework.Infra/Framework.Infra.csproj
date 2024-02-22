@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Audit\" />
-    <Folder Include="Contexts\" />
     <Folder Include="Services\Auth\" />
   </ItemGroup>
 

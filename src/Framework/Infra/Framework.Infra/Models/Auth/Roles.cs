@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Framework.Infra.Models.Auth;
 
-public class Role :IdentityRole, IAuditable<Guid>
+public class Role :IdentityRole, IAuditable<string>
 {
     public Role(string rolename, string roleDescription) : base(rolename)
     {
@@ -18,5 +18,4 @@ public class Role :IdentityRole, IAuditable<Guid>
     public bool IsDeleted { get; set; }
     public DateTime? IsDeletedOn { get; set; }
     public string? IsDeletedBy { get; set; }
-    Guid IEntity<Guid>.Id { get; }
 }
