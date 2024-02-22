@@ -10,4 +10,8 @@
     <Folder Include="Services\Auth\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\App\Framework.App\Framework.App.csproj" />
+  </ItemGroup>
+
 </Project>
